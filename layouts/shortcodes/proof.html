@@ -1,0 +1,8 @@
+<div class="proof-container">
+    <div class="proof-header">
+        <strong>{{ .Get 0 | default "Proof" }}</strong>
+    </div>
+    <div class="proof-content">
+        {{ .Inner | markdownify }}
+    </div>
+</div>
