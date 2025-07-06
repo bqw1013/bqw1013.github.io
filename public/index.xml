@@ -4,7 +4,7 @@
     <title>Qiangwei Bai&#39;s Blog</title>
     <link>http://localhost:1313/</link>
     <description>Recent content on Qiangwei Bai&#39;s Blog</description>
-    <generator>Hugo -- 0.147.9</generator>
+    <generator>Hugo -- 0.146.0</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 05 Jul 2025 18:49:41 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
@@ -16,14 +16,17 @@
       <description>&lt;h1 id=&#34;1-policy-entropy-and-entropy-collapse&#34;&gt;1. Policy Entropy and Entropy Collapse&lt;/h1&gt;
 &lt;h2 id=&#34;11-entropy-definition&#34;&gt;1.1 Entropy Definition&lt;/h2&gt;
 &lt;p&gt;​	Let $x$ denote the prompt and $y$ denote the response. The policy $\pi_{\theta}$ outputs a probability distribution for a token $t$ as follows:
+&lt;/p&gt;
 $$
 p_t=(p_{t,1},\dots,p_{t,|V|})=\pi_{\theta}(\cdot|x,y_{\lt t})=\text{softmax}(\frac{z_t}{T}) \quad (1)
-$$&lt;/p&gt;
-&lt;p&gt;Here, $|V|$ is the size of the vocabulary, $z_t\in\mathbb{R}^V$ arg the &lt;code&gt;logits&lt;/code&gt;, and $T\in\mathbb{R}$ is the decoding temprature.&lt;/p&gt;
+$$&lt;p&gt;Here, $|V|$ is the size of the vocabulary, $z_t\in\mathbb{R}^V$ are the &lt;code&gt;logits&lt;/code&gt;, and $T\in\mathbb{R}$ is the decoding temprature.&lt;/p&gt;
 &lt;p&gt;​	The entropy for token $t$ is then given by:
+&lt;/p&gt;
 $$
 H_t=-\sum_{j=1}^{|V|} p_{t,j}\log p_{t,j} \quad (2)
-$$&lt;/p&gt;</description>
+$$&lt;h2 id=&#34;12-entropy-collapse-and-model-performance&#34;&gt;1.2 Entropy Collapse and Model Performance&lt;/h2&gt;
+&lt;p&gt;​	In the early stages of RL training, the model&amp;rsquo;s entropy drops sharply. As entropy decreases, accuracy enters a period of rapid growth. However, the rapid depletion of entropy can lead to the model becoming overconfident, which in turn diminishes its exploration capabilities. Through empirical studies, [1] established a quantitative relationship between policy entropy $H$ and downstream task performance $R$:
+&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

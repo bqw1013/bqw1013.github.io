@@ -1,25 +1,185 @@
-{{- if .Site.Params.math }}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<!-- MathJax 配置 - 与 Typora 兼容 -->
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        renderMathInElement(document.body, {
-            // 与Typora兼容的分隔符设置
-            delimiters: [
-                {left: '$$', right: '$$', display: true},
-                {left: '$', right: '$', display: false}
-            ],
-            // 兼容性选项
-            throwOnError: false,
-            errorColor: '#cc0000',
-            trust: (context) => ['\\htmlId', '\\href'].includes(context.command),
-            macros: {
-                "\\eqref": "\\href{###1}{(\\text{#1})}",
-                "\\ref": "\\href{###1}{\\text{#1}}",
-                "\\label": "\\htmlId{#1}{}"
-            }
-        });
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        //processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams',
+        macros: {
+          // 常用的数学宏定义
+          R: "\\mathbb{R}",
+          C: "\\mathbb{C}",
+          N: "\\mathbb{N}",
+          Z: "\\mathbb{Z}",
+          Q: "\\mathbb{Q}",
+          E: "\\mathbb{E}",
+          P: "\\mathbb{P}",
+          argmax: "\\operatorname{argmax}",
+          argmin: "\\operatorname{argmin}",
+          softmax: "\\operatorname{softmax}",
+          ReLU: "\\operatorname{ReLU}",
+          sigmoid: "\\operatorname{sigmoid}",
+          tanh: "\\operatorname{tanh}"
+        }
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore',
+        processHtmlClass: 'tex2jax_process'
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  
+  <!-- MathJax 库 -->
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  
+  <!-- 代码高亮样式优化 -->
+  <style>
+    /* 数学公式样式调整 */
+    .MathJax {
+      font-size: 1.1em;
+    }
+    
+    /* 行内公式样式 */
+    .MathJax_Display {
+      margin: 1em 0;
+    }
+    
+    /* 代码块样式优化 */
+    .highlight {
+      margin: 1em 0;
+      border-radius: 8px;
+      overflow: auto;
+    }
+    
+    /* 表格样式 */
+    table {
+      border-collapse: collapse;
+      margin: 1em 0;
+      width: 100%;
+    }
+    
+    table th,
+    table td {
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      text-align: left;
+    }
+    
+    table th {
+      background-color: var(--theme);
+      font-weight: bold;
+    }
+    
+    /* 引用块样式 */
+    blockquote {
+      margin: 1em 0;
+      padding: 0 1em;
+      border-left: 4px solid var(--primary);
+      background-color: var(--code-bg);
+      border-radius: 4px;
+    }
+    
+    /* 脚注样式 */
+    .footnotes {
+      margin-top: 2em;
+      padding-top: 1em;
+      border-top: 1px solid var(--border);
+    }
+    
+    .footnotes ol {
+      padding-left: 1.5em;
+    }
+    
+    .footnotes li {
+      margin-bottom: 0.5em;
+    }
+    
+    /* 响应式图片 */
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+  </style>
+  
+  <!-- 可选：添加一些AI/ML相关的自定义样式 -->
+  <style>
+    /* 算法伪代码样式 */
+    .algorithm {
+      background-color: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1em;
+      margin: 1em 0;
+    }
+    
+    .algorithm-title {
+      font-weight: bold;
+      margin-bottom: 0.5em;
+      color: var(--primary);
+    }
+    
+    /* 定理、证明等数学环境样式 */
+    .theorem,
+    .proof,
+    .lemma,
+    .definition {
+      background-color: var(--code-bg);
+      border-left: 4px solid var(--primary);
+      border-radius: 4px;
+      padding: 1em;
+      margin: 1em 0;
+    }
+    
+    .theorem-title,
+    .proof-title,
+    .lemma-title,
+    .definition-title {
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 0.5em;
+    }
+    
+    .proof::after {
+      content: "∎";
+      float: right;
+      font-weight: bold;
+    }
+  </style>
+  
+  <!-- 可选：添加代码复制功能的增强 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 为所有代码块添加语言标签
+      const codeBlocks = document.querySelectorAll('pre code');
+      codeBlocks.forEach(function(block) {
+        const parent = block.parentElement;
+        const lang = block.className.match(/language-(\w+)/);
+        if (lang) {
+          const label = document.createElement('span');
+          label.className = 'code-lang';
+          label.textContent = lang[1].toUpperCase();
+          label.style.cssText = `
+            position: absolute;
+            top: 0.5em;
+            right: 0.5em;
+            background: var(--primary);
+            color: white;
+            padding: 0.2em 0.5em;
+            border-radius: 3px;
+            font-size: 0.8em;
+            font-family: monospace;
+          `;
+          parent.style.position = 'relative';
+          parent.appendChild(label);
+        }
+      });
     });
-</script>
-{{- end }}
+  </script>

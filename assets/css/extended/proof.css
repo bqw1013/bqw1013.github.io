@@ -30,15 +30,15 @@
 }
 
 :root {
-    --main-width: 1000px; /* 从默认的720px增加到1000px */
-    --nav-width: 1200px;  /* 相应增加导航栏宽度 */
+    --main-width: 800px; /* 从默认的720px增加到1000px */
+    --nav-width: 1000px;  /* 相应增加导航栏宽度 */
 }
 
 /* 在更大的屏幕上进一步增加宽度 */
 @media (min-width: 1400px) {
     :root {
-        --main-width: 1200px;
-        --nav-width: 1400px;
+        --main-width: 1000px;
+        --nav-width: 1200px;
     }
 }
 

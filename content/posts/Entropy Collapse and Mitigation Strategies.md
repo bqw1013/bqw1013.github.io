@@ -13,7 +13,7 @@ p_t=(p_{t,1},\dots,p_{t,|V|})=\pi_{\theta}(\cdot|x,y_{\lt t})=\text{softmax}(\fr
 $$
 
 
-Here, $|V|$ is the size of the vocabulary, $z_t\in\mathbb{R}^V$ arg the `logits`, and $T\in\mathbb{R}$ is the decoding temprature.
+Here, $|V|$ is the size of the vocabulary, $z_t\in\mathbb{R}^V$ are the `logits`, and $T\in\mathbb{R}$ is the decoding temprature.
 
 ​	The entropy for token $t$ is then given by:
 $$
@@ -43,15 +43,15 @@ where $a$ and $b$ are fitting coefficients that reflect the intrinsic properties
 
 # 2. GRPO
 
-​	GRPO builds upon PPO by computing advantages through intra-group normalization. Specifically, give a prompt $x$, we sample $G$ response $\{y_i\}_{i=1}^G$. The advantages is then calculated as:
+​	GRPO builds upon PPO by computing advantages through intra-group normalization. Specifically, give a prompt $x$, we sample $G$ response $\lbrace y_i \rbrace_{i=1}^G$. The advantages is then calculated as:
 $$
-A_{i,t}=\frac{r_i-\text{mean}(\{r_i\}_{i=1}^G)}{\text{std}(\{r_i\}_{i=1}^G)} \quad (4)
+A_{i,t}=\frac{r_i-\text{mean}(\lbrace r_i\rbrace_{i=1}^G)}{\text{std}(\lbrace r_i\rbrace_{i=1}^G)} \quad (4)
 $$
 where $r_i$ is reward value for the response $y_i$.
 
 ​	The objective function of GRPO is:
 $$
-J_{\text{GRPO}}=\mathbb{E}_{x\sim p,\{y_i\}_{i=1}^G\sim\pi_{\text{old}}(\cdot|x)}\left[
+J_{\text{GRPO}}=\mathbb{E}_{x\sim p,\lbrace y_i \rbrace _{i=1}^G\sim\pi_{\text{old}}(\cdot|x)}\left[
 \frac{1}{G}\sum_{i=1}^G\frac{1}{|y_i|}\sum_{t=1}^{|y_i|}\min\left(r_{i,t}(\theta)A_{i,t},\text{clip}(r_{i,t}(\theta),1-\varepsilon,1+\varepsilon)A_{i,t}\right)
 \right] \quad (5)
 $$
@@ -82,7 +82,7 @@ $$
 \begin{align*}
 \psi(H_{i,t})&=\min\Big(\alpha\cdot H_{i,t}^{\text{detach}},\frac{|A_{i,t}|}{k}\Big) \quad (8) \\
 \hat{A}_{i,t}&=A_{i,t}+\psi(H_{i,t}) \quad (9)\\
-\end{align*} \\
+\end{align*}
 $$
 Here, $\psi(H_{i,t})$ servers as an advantage bonus, which is capped to ensure it does not exceed $1/k$ of the original advantage's magnitude.
 
@@ -93,7 +93,7 @@ Here, $\psi(H_{i,t})$ servers as an advantage bonus, which is capped to ensure i
 ​	[7] analyses the impact of positive and negative samples on entropy collapse and finds in the experiments that surprisingly good results can be achieved using only negative samples. Consequently, for the case of binary rewards(+1 for positive samples, -1 for negative), [7] further analyses the gradient of the REINFORCE loss with respect to the `logits`.
 $$
 -\frac{\partial L_t}{\partial z_{t,v}}=\begin{cases}
-r\cdot(1-\pi_{v})&v=y_t \\
+r\cdot(1-\pi_{v})&v=y_t \\\\
 -r\cdot\pi_{v} &v\neq y_t
 \end{cases} \quad (10)
 $$
@@ -107,7 +107,7 @@ $$
 $$
 ​	We discuss this in two cases:
 
-​	**Case 1**: $v=y_t$, i.e., taking the derivative with respect to logit of the sampling token.
+​	Case 1: $v=y_t$, i.e., taking the derivative with respect to logit of the sampling token.
 $$
 \begin{align*}
 \frac{\partial(\log\pi_{\theta}(y_t))}{\partial z_{t,{y_t}}}&=\frac{\partial z_{t,{y_t}}}{\partial z_{t,{y_t}}}-\frac{\partial}{\partial z_{t,{y_t}}}\log\left(\sum_{v'\in V}\exp(z_{t,{v'}})\right) \\
@@ -115,7 +115,7 @@ $$
 &=1-\pi_{y_t}
 \end{align*}
 $$
-​	**Case 2**: $v\neq y_t$, i.e., taking the derivative with respect to logit of a non-sampled token.
+​	Case 2: $v\neq y_t$, i.e., taking the derivative with respect to logit of a non-sampled token.
 $$
 \begin{align*}
 \frac{\partial(\log\pi_{\theta}(y_t))}{\partial z_{t,{v}}}&=\frac{\partial z_{t,{y_t}}}{\partial z_{t,{v}}}-\frac{\partial}{\partial z_{t,{v}}}\log\left(\sum_{v'\in V}\exp(z_{t,{v'}})\right) \\
@@ -128,7 +128,7 @@ $$
 \frac{\partial L_t}{\partial z_{t,v}}=\begin{cases}
 -r\cdot(1-\pi_{y_t})&v=y_t \\
 r\cdot\pi_v &v\neq y_t
-\end{cases} \\
+\end{cases}
 $$
 {{< /proof >}}
 

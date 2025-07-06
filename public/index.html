@@ -2,16 +2,16 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.147.9"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.146.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
 <title>Qiangwei Bai&#39;s Blog</title>
-<meta name="keywords" content="AI, LLM, RL">
-<meta name="description" content="A blog about AI technology">
+<meta name="keywords" content="AI, LLM, RL, Deep Learning, Machine Learning, Neural Networks">
+<meta name="description" content="A blog about AI technology, deep learning, and machine learning">
 <meta name="author" content="Qiangwei Bai">
 <link rel="canonical" href="http://localhost:1313/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.476a77ed88e359f5e3ff93b72a898819adeee2a2e06fe281e5d88eea72a52038.css" integrity="sha256-R2p37YjjWfXj/5O3KomIGa3u4qLgb&#43;KB5diO6nKlIDg=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.eeed1692cf456efccaa250b7546a919d134d8ce5846c243322828d456c4c0cf4.css" integrity="sha256-7u0Wks9FbvzKolC3VGqRnRNNjOWEbCQzIoKNRWxMDPQ=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
@@ -59,29 +59,190 @@
 
     </style>
 </noscript>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        renderMathInElement(document.body, {
-            
-            delimiters: [
-                {left: '$$', right: '$$', display: true},
-                {left: '$', right: '$', display: false}
-            ],
-            
-            throwOnError: false,
-            errorColor: '#cc0000',
-            trust: (context) => ['\\htmlId', '\\href'].includes(context.command),
-            macros: {
-                "\\eqref": "\\href{###1}{(\\text{#1})}",
-                "\\ref": "\\href{###1}{\\text{#1}}",
-                "\\label": "\\htmlId{#1}{}"
-            }
-        });
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        
+        processEnvironments: true,
+        tags: 'ams',
+        macros: {
+          
+          R: "\\mathbb{R}",
+          C: "\\mathbb{C}",
+          N: "\\mathbb{N}",
+          Z: "\\mathbb{Z}",
+          Q: "\\mathbb{Q}",
+          E: "\\mathbb{E}",
+          P: "\\mathbb{P}",
+          argmax: "\\operatorname{argmax}",
+          argmin: "\\operatorname{argmin}",
+          softmax: "\\operatorname{softmax}",
+          ReLU: "\\operatorname{ReLU}",
+          sigmoid: "\\operatorname{sigmoid}",
+          tanh: "\\operatorname{tanh}"
+        }
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore',
+        processHtmlClass: 'tex2jax_process'
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  
+  
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  
+  
+  <style>
+     
+    .MathJax {
+      font-size: 1.1em;
+    }
+    
+     
+    .MathJax_Display {
+      margin: 1em 0;
+    }
+    
+     
+    .highlight {
+      margin: 1em 0;
+      border-radius: 8px;
+      overflow: auto;
+    }
+    
+     
+    table {
+      border-collapse: collapse;
+      margin: 1em 0;
+      width: 100%;
+    }
+    
+    table th,
+    table td {
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      text-align: left;
+    }
+    
+    table th {
+      background-color: var(--theme);
+      font-weight: bold;
+    }
+    
+     
+    blockquote {
+      margin: 1em 0;
+      padding: 0 1em;
+      border-left: 4px solid var(--primary);
+      background-color: var(--code-bg);
+      border-radius: 4px;
+    }
+    
+     
+    .footnotes {
+      margin-top: 2em;
+      padding-top: 1em;
+      border-top: 1px solid var(--border);
+    }
+    
+    .footnotes ol {
+      padding-left: 1.5em;
+    }
+    
+    .footnotes li {
+      margin-bottom: 0.5em;
+    }
+    
+     
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+  </style>
+  
+  
+  <style>
+     
+    .algorithm {
+      background-color: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1em;
+      margin: 1em 0;
+    }
+    
+    .algorithm-title {
+      font-weight: bold;
+      margin-bottom: 0.5em;
+      color: var(--primary);
+    }
+    
+     
+    .theorem,
+    .proof,
+    .lemma,
+    .definition {
+      background-color: var(--code-bg);
+      border-left: 4px solid var(--primary);
+      border-radius: 4px;
+      padding: 1em;
+      margin: 1em 0;
+    }
+    
+    .theorem-title,
+    .proof-title,
+    .lemma-title,
+    .definition-title {
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 0.5em;
+    }
+    
+    .proof::after {
+      content: "∎";
+      float: right;
+      font-weight: bold;
+    }
+  </style>
+  
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      
+      const codeBlocks = document.querySelectorAll('pre code');
+      codeBlocks.forEach(function(block) {
+        const parent = block.parentElement;
+        const lang = block.className.match(/language-(\w+)/);
+        if (lang) {
+          const label = document.createElement('span');
+          label.className = 'code-lang';
+          label.textContent = lang[1].toUpperCase();
+          label.style.cssText = `
+            position: absolute;
+            top: 0.5em;
+            right: 0.5em;
+            background: var(--primary);
+            color: white;
+            padding: 0.2em 0.5em;
+            border-radius: 3px;
+            font-size: 0.8em;
+            font-family: monospace;
+          `;
+          parent.style.position = 'relative';
+          parent.appendChild(label);
+        }
+      });
     });
-</script>
+  </script>
 </head>
 
 <body class="list" id="top">
@@ -125,13 +286,13 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/archives" title="Archive">
-                    <span>Archive</span>
+                <a href="http://localhost:1313/posts/" title="Posts">
+                    <span>Posts</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" title="Search">
-                    <span>Search</span>
+                <a href="http://localhost:1313/categories/" title="Categories">
+                    <span>Categories</span>
                 </a>
             </li>
             <li>
@@ -140,25 +301,62 @@
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/" title="Categories">
-                    <span>Categories</span>
+                <a href="http://localhost:1313/search/" title="Search">
+                    <span>Search</span>
                 </a>
             </li>
         </ul>
     </nav>
 </header>
 <main class="main"> 
+<article class="first-entry home-info">
+    <header class="entry-header">
+        <h1>Welcome to Qiangwei Bai&rsquo;s AI Blog</h1>
+    </header>
+    <div class="entry-content">
+        Exploring the frontiers of artificial intelligence, deep learning, and machine learning research
+    </div>
+    <footer class="entry-footer">
+        <div class="social-icons" >
+    <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer me"
+        title="Github">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+    </a>
+    <a href="mailto:your-email@example.com" target="_blank" rel="noopener noreferrer me"
+        title="Email">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+    <polyline points="22,6 12,13 2,6"></polyline>
+</svg>
+    </a>
+    <a href="index.xml" target="_blank" rel="noopener noreferrer me"
+        title="Rss">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+    </a>
+</div>
 
-<article class="first-entry"> 
+    </footer>
+</article>
+
+<article class="post-entry"> 
   <header class="entry-header">
     <h2 class="entry-hint-parent">Entropy Collapse and Mitigation Strategies
     </h2>
   </header>
   <div class="entry-content">
-    <p>1. Policy Entropy and Entropy Collapse 1.1 Entropy Definition ​	Let $x$ denote the prompt and $y$ denote the response. The policy $\pi_{\theta}$ outputs a probability distribution for a token $t$ as follows: $$ p_t=(p_{t,1},\dots,p_{t,|V|})=\pi_{\theta}(\cdot|x,y_{\lt t})=\text{softmax}(\frac{z_t}{T}) \quad (1) $$
-Here, $|V|$ is the size of the vocabulary, $z_t\in\mathbb{R}^V$ arg the logits, and $T\in\mathbb{R}$ is the decoding temprature.
-​	The entropy for token $t$ is then given by: $$ H_t=-\sum_{j=1}^{|V|} p_{t,j}\log p_{t,j} \quad (2) $$
-...</p>
+    <p>1. Policy Entropy and Entropy Collapse 1.1 Entropy Definition ​	Let $x$ denote the prompt and $y$ denote the response. The policy $\pi_{\theta}$ outputs a probability distribution for a token $t$ as follows: $$ p_t=(p_{t,1},\dots,p_{t,|V|})=\pi_{\theta}(\cdot|x,y_{\lt t})=\text{softmax}(\frac{z_t}{T}) \quad (1) $$Here, $|V|$ is the size of the vocabulary, $z_t\in\mathbb{R}^V$ are the logits, and $T\in\mathbb{R}$ is the decoding temprature.
+​	The entropy for token $t$ is then given by: $$ H_t=-\sum_{j=1}^{|V|} p_{t,j}\log p_{t,j} \quad (2) $$1.2 Entropy Collapse and Model Performance ​	In the early stages of RL training, the model’s entropy drops sharply. As entropy decreases, accuracy enters a period of rapid growth. However, the rapid depletion of entropy can lead to the model becoming overconfident, which in turn diminishes its exploration capabilities. Through empirical studies, [1] established a quantitative relationship between policy entropy $H$ and downstream task performance $R$: ...</p>
   </div>
   <footer class="entry-footer"><span title='2025-07-05 18:49:41 +0800 CST'>July 5, 2025</span>&nbsp;·&nbsp;9 min&nbsp;·&nbsp;Qiangwei Bai</footer>
   <a class="entry-link" aria-label="post link to Entropy Collapse and Mitigation Strategies" href="http://localhost:1313/posts/entropy-collapse-and-mitigation-strategies/"></a>

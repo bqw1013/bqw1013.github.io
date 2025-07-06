@@ -6,16 +6,40 @@ theme: ["PaperMod"]
 pagination:
   pagerSize: 10
 
+# 启用数学公式支持
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+          - ['$$', '$$']
+          - ['\\[', '\\]']
+          inline:
+          - ['$', '$']
+          - ['\\(', '\\)']
+  highlight:
+    style: github
+    noClasses: false
+    codeFences: true
+    guessSyntax: true
+    lineNos: true
+    lineNumbersInTable: true
+
 params:
   author: "Qiangwei Bai"
-  description: "A blog about AI technology"
-  keywords: ["AI", "LLM", "RL"]
-
-  defaultTheme: "auto"  # auto, light, dark
-  disableThemeToggle: false
-
-  math: true
-
+  description: "A blog about AI technology, deep learning, and machine learning"
+  keywords: ["AI", "LLM", "RL", "Deep Learning", "Machine Learning", "Neural Networks"]
+  
+  # 主页配置
+  homeInfoParams:
+    title: "Welcome to Qiangwei Bai's AI Blog"
+    content: "Exploring the frontiers of artificial intelligence, deep learning, and machine learning research"
+  
+  # 搜索功能
   fuseOpts:
     isCaseSensitive: false
     shouldSort: true
@@ -25,64 +49,54 @@ params:
     minMatchCharLength: 0
     keys: ["title", "permalink", "summary", "content"]
   
-  # 分享按钮
-  ShareButtons: ["linkedin", "twitter", "reddit", "facebook"]
+  # 社交链接
+  socialIcons:
+    - name: github
+      url: "https://github.com/your-username"
+    - name: email
+      url: "mailto:your-email@example.com"
+    - name: rss
+      url: "index.xml"
   
-  # 显示阅读时间
+  # 显示设置
   ShowReadingTime: true
-  # 显示分享按钮
   ShowShareButtons: true
-  # 显示目录
-  ShowToc: true
-  # 目录可折叠
-  TocOpen: false
-  # 显示代码复制按钮
-  ShowCodeCopyButtons: true
-  # 显示文章导航
   ShowPostNavLinks: true
-  # 显示面包屑导航
   ShowBreadCrumbs: true
-  # 显示完整文本搜索
-  ShowFullTextSearch: true
+  ShowCodeCopyButtons: true
+  ShowRssButtonInSectionTermList: true
+  ShowToc: true
+  TocOpen: false
+  
+  # 评论系统（可选）
+  comments: false
+  
+  # 数学公式支持
+  math: true
 
-markup:
-  goldmark:
-    renderer:
-      unsafe: true
-
-  highlight:
-    style: github
-    lineNos: true
-    noClasses: false
-    anchorLineNos: true
-    codeFences: true
-    guessSyntax: true
-    tabWidth: 2
-    languages: ["python", "javascript", "bash", "yaml", "json", "sql", "r", "julia"]
-
+# 菜单配置
 menu:
   main:
-    - name: "Archive"
-      url: "/archives"
+    - identifier: posts
+      name: Posts
+      url: /posts/
       weight: 10
-    - name: "Search"
-      url: "/search/"
+    - identifier: categories
+      name: Categories
+      url: /categories/
       weight: 20
-    - name: "Tags"
-      url: "/tags/"
+    - identifier: tags
+      name: Tags
+      url: /tags/
       weight: 30
-    - name: "Categories"
-      url: "/categories/"
+    - identifier: search
+      name: Search
+      url: /search/
       weight: 40
 
+# 输出格式
 outputs:
   home:
     - HTML
     - RSS
     - JSON
-
-sitemap:
-  changefreq: "weekly"
-  priority: 0.5
-  filename: "sitemap.xml"
-
