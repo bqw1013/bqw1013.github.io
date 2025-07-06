@@ -2,6 +2,8 @@
 date: '2025-07-05T18:49:41+08:00'
 draft: false
 title: 'Entropy Collapse and Mitigation Strategies'
+categories: ["LLM", "Reinforcement Learning"]
+tags: ["GRPO", "Entropy", "Entropy Collapse"]
 ---
 # 1. Policy Entropy and Entropy Collapse
 
